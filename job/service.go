@@ -905,8 +905,8 @@ func (srv *Service) Deploy(ctx context.Context, projectName string, namespaceNam
 	srv.bulkDelete(ctx, namespaceSpec, deletedJobs, observers)
 
 	// Resolve dependency
-	srv.resolveDependency(ctx, namespaceSpec.ProjectSpec, savedCreatedJobs, observers)
-	srv.resolveDependency(ctx, namespaceSpec.ProjectSpec, savedModifiedJobs, observers)
+	srv.resolveAndPersistDependency(ctx, namespaceSpec.ProjectSpec, savedCreatedJobs, observers)
+	srv.resolveAndPersistDependency(ctx, namespaceSpec.ProjectSpec, savedModifiedJobs, observers)
 
 	// Deploy through deploy manager
 	deployID, err := srv.deployManager.Deploy(ctx, namespaceSpec.ProjectSpec)
